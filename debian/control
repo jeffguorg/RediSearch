@@ -1,0 +1,13 @@
+Source: redis-redisearch
+Section: database
+Priority: important
+Maintainer: Jeff Guo <jeffguorg@gmail.com>
+Homepage: https://redisearch.io/
+
+Package: redis-redisearch
+Architecture: any
+Depends:
+  redis-server
+  ${misc:Depends},
+  ${shlibs:Depends},
+Description: Ababa
