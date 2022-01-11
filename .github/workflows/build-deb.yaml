@@ -1,0 +1,28 @@
+name: Build deb for debian
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - '[0-9]+.[0-9]+'
+    paths:
+      - 'mkdocs.yml'
+      - 'docs/**'
+
+jobs:
+  deploy:
+    runs-on: debian-bullseye
+
+    steps:
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+    - uses: actions/checkout@v2.1.1
+    - name: Install deps
+      shell: bash
+      run: apt install -y build-essential redis
+    - name: build
+      shell: bash
+      run: debuild -b -uc -us
